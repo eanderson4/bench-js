@@ -174,7 +174,7 @@ class BufferBenchmark {
     const timerQuickSumProcessor = new TimerBatchProcessor<number>('interval-quick-sum',150, processItemsWithSum);
 
     // const emissionRates = [1, 100, 1e5];
-    const emissionRates = [1, 10, 100, 1e3, 1e4, 1e5, 5e5, 1e6, 56, 1e7];
+    const emissionRates = [1, 10, 100, 1e3, 1e4, 1e5, 5e5, 1e6, 5e6, 1e7];
     const processors = [
       rxProcessor, 
       timerProcessor,
@@ -276,7 +276,7 @@ class BufferBenchmark {
 
   private printResults(results: StatResult[], iterations: number) {
     console.log(`=== Batch Processor Performance Benchmark (iterations=${iterations})===`);
-    console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples | Avg Batch | Batches | Items  | Time (ms±σ)     | CPU %(±σ)');
+    console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ)');
     console.log('--------------------------------------------------------------------------------------------------------');
   
     results.forEach(result => {
@@ -284,10 +284,10 @@ class BufferBenchmark {
         `${result.name.padEnd(22)} | ` +
         `${result.bufferTimeMs.toString().padStart(9)} | ` +
         `${result.rate.toString().padStart(9)} | ` +
-        `${result.samples.toString().padStart(7)} | ` +
-        `${result.avgBatchSize.toFixed(1).padStart(9)} | ` +
+        `${result.samples.toString().padStart(8)} | ` +
+        `${result.avgBatchSize.toFixed(1).padStart(10)} | ` +
         `${result.batchesComplete.toString().padStart(7)} | ` +
-        `${result.itemsComplete.toString().padStart(6)} | ` +
+        `${result.itemsComplete.toString().padStart(8)} | ` +
         `${result.avgTime.toFixed(1).padStart(6)}±${result.stdDevTime.toFixed(1).padStart(4)} | ` +
         `${result.avgCpu.toFixed(1).padStart(4)}±${result.stdDevCpu.toFixed(1)}`
       );

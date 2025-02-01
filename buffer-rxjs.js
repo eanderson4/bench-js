@@ -166,7 +166,7 @@ var BufferBenchmark = /** @class */ (function () {
                         timerSumProcessor = new TimerBatchProcessor('interval-sum', 250, processItemsWithSum);
                         rxQuickSumProcessor = new RxJSBatchProcessor('rxjs-quick-sum', 150, processItemsWithSum);
                         timerQuickSumProcessor = new TimerBatchProcessor('interval-quick-sum', 150, processItemsWithSum);
-                        emissionRates = [1, 10, 100, 1e3, 1e4, 1e5, 5e5, 1e6, 56, 1e7];
+                        emissionRates = [1, 10, 100, 1e3, 1e4, 1e5, 5e5, 1e6, 5e6, 1e7];
                         processors = [
                             rxProcessor,
                             timerProcessor,
@@ -282,16 +282,16 @@ var BufferBenchmark = /** @class */ (function () {
     };
     BufferBenchmark.prototype.printResults = function (results, iterations) {
         console.log("=== Batch Processor Performance Benchmark (iterations=".concat(iterations, ")==="));
-        console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples | Avg Batch | Batches | Items  | Time (ms±σ)     | CPU %(±σ)');
+        console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ)');
         console.log('--------------------------------------------------------------------------------------------------------');
         results.forEach(function (result) {
             console.log("".concat(result.name.padEnd(22), " | ") +
                 "".concat(result.bufferTimeMs.toString().padStart(9), " | ") +
                 "".concat(result.rate.toString().padStart(9), " | ") +
-                "".concat(result.samples.toString().padStart(7), " | ") +
-                "".concat(result.avgBatchSize.toFixed(1).padStart(9), " | ") +
+                "".concat(result.samples.toString().padStart(8), " | ") +
+                "".concat(result.avgBatchSize.toFixed(1).padStart(10), " | ") +
                 "".concat(result.batchesComplete.toString().padStart(7), " | ") +
-                "".concat(result.itemsComplete.toString().padStart(6), " | ") +
+                "".concat(result.itemsComplete.toString().padStart(8), " | ") +
                 "".concat(result.avgTime.toFixed(1).padStart(6), "\u00B1").concat(result.stdDevTime.toFixed(1).padStart(4), " | ") +
                 "".concat(result.avgCpu.toFixed(1).padStart(4), "\u00B1").concat(result.stdDevCpu.toFixed(1)));
         });
