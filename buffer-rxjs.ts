@@ -274,25 +274,25 @@ class BufferBenchmark {
     });
   }
 
-  private printResults(results: StatResult[], iterations: number) {
-    console.log(`=== Batch Processor Performance Benchmark (iterations=${iterations})===`);
-    console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ)');
-    console.log('--------------------------------------------------------------------------------------------------------');
+
+  private printResults(results: StatResult[]) {
+    // Header
+    console.log('| Name                | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ) |');
+    console.log('|---------------------|------------|------------|----------|------------|---------|----------|-----------------|-----------|');
   
     results.forEach(result => {
       console.log(
-        `${result.name.padEnd(22)} | ` +
-        `${result.bufferTimeMs.toString().padStart(9)} | ` +
-        `${result.rate.toString().padStart(9)} | ` +
+        `| ${result.name.padEnd(19)} | ` +
+        `${result.bufferTimeMs.toString().padStart(10)} | ` +
+        `${result.rate.toString().padStart(10)} | ` +
         `${result.samples.toString().padStart(8)} | ` +
         `${result.avgBatchSize.toFixed(1).padStart(10)} | ` +
         `${result.batchesComplete.toString().padStart(7)} | ` +
         `${result.itemsComplete.toString().padStart(8)} | ` +
         `${result.avgTime.toFixed(1).padStart(6)}±${result.stdDevTime.toFixed(1).padStart(4)} | ` +
-        `${result.avgCpu.toFixed(1).padStart(4)}±${result.stdDevCpu.toFixed(1)}`
+        `${result.avgCpu.toFixed(1)}±${result.stdDevCpu.toFixed(1).padStart(3)} |`
       );
     });
-    console.log('--------------------------------------------------------------------------------------------------------');
   }
 }
 

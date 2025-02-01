@@ -280,22 +280,21 @@ var BufferBenchmark = /** @class */ (function () {
             });
         });
     };
-    BufferBenchmark.prototype.printResults = function (results, iterations) {
-        console.log("=== Batch Processor Performance Benchmark (iterations=".concat(iterations, ")==="));
-        console.log('Name                   | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ)');
-        console.log('--------------------------------------------------------------------------------------------------------');
+    BufferBenchmark.prototype.printResults = function (results) {
+        // Header
+        console.log('| Name                | Buffer(ms) | Rate (e/s) | Samples  | Avg Batch  | Batches | Items    | Time (ms±σ)     | CPU %(±σ) |');
+        console.log('|---------------------|------------|------------|----------|------------|---------|----------|-----------------|-----------|');
         results.forEach(function (result) {
-            console.log("".concat(result.name.padEnd(22), " | ") +
-                "".concat(result.bufferTimeMs.toString().padStart(9), " | ") +
-                "".concat(result.rate.toString().padStart(9), " | ") +
+            console.log("| ".concat(result.name.padEnd(19), " | ") +
+                "".concat(result.bufferTimeMs.toString().padStart(10), " | ") +
+                "".concat(result.rate.toString().padStart(10), " | ") +
                 "".concat(result.samples.toString().padStart(8), " | ") +
                 "".concat(result.avgBatchSize.toFixed(1).padStart(10), " | ") +
                 "".concat(result.batchesComplete.toString().padStart(7), " | ") +
                 "".concat(result.itemsComplete.toString().padStart(8), " | ") +
                 "".concat(result.avgTime.toFixed(1).padStart(6), "\u00B1").concat(result.stdDevTime.toFixed(1).padStart(4), " | ") +
-                "".concat(result.avgCpu.toFixed(1).padStart(4), "\u00B1").concat(result.stdDevCpu.toFixed(1)));
+                "".concat(result.avgCpu.toFixed(1), "\u00B1").concat(result.stdDevCpu.toFixed(1).padStart(3), " |"));
         });
-        console.log('--------------------------------------------------------------------------------------------------------');
     };
     return BufferBenchmark;
 }());
